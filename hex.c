@@ -6,7 +6,7 @@ int fhex(char *num) {
 	int res = 0;
 	int sign = 1;
 	int i = 2;
-	if (number[0] == '-'){
+	if (num[0] == '-'){
 		sign = -1;
 		i = 3;
 	}

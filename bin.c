@@ -10,7 +10,7 @@ int fbin(char *num){
 		sign = -1;
 		i =1;
 	}
-	for (int i = 2; i < strlen(num); i++){
+	for (; i < strlen(num); i++){
 		if (num[i] >= '0' && num[i] <= '1'){
 			res = res*2 + (num[i]- '0');
 		}

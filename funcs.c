@@ -41,7 +41,7 @@ void print(int n, int fl) {
 
     switch (fl) {
         case 0:
-            res = to_hex(n * sign);
+            res = thex(n * sign);
             len = strlen(res);
             if (len) {
                 printf("0x%s (%d)\n", res, n);
@@ -50,7 +50,7 @@ void print(int n, int fl) {
             }
             break;
         case 1:
-            res = to_oct(n * sign);
+            res = toct(n * sign);
             len = strlen(res);
             if (len) {
                 printf("0%s (%d)\n", res, n);
@@ -59,7 +59,7 @@ void print(int n, int fl) {
             }
             break;
         case 2:
-            res = to_bin(n * sign);
+            res = tbin(n * sign);
             len = strlen(res);
             if (len) {
                 printf("%s (%d)\n", res, n);
@@ -90,11 +90,11 @@ int check_system(char *str) {
 int convert(char *str, int fl) {
     switch (fl) {
         case 0:
-            return from_hex(str);
+            return fhex(str);
         case 1:
-            return from_oct(str);
+            return foct(str);
         case 2:
-            return from_bin(str);
+            return fbin(str);
         default:
             return -1;
     }
@@ -152,16 +152,16 @@ int for_two_numbers(char *str) {
         return 1;
     }
 
-    int num1 = convert(num1, fl1);
-    int num2 = convert(num2, fl2);
+    int a = convert(num1, fl1);
+    int b = convert(num2, fl2);
 
-    int result = operation(num1, num2, op);
+    int result = operation(a, b, op);
     print(result, fl1);
 
     return 0;
 }
 
-int calculator(char *str) {
+int calc(char *str) {
     if (str[0] == '~') {
         return for_one_number(str);
     } else {
