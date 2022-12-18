@@ -4,12 +4,18 @@
 
 int fbin(char *num){
 	int res = 0;
+	int sign = 1;
+	int i = 0;
+	if (num[0]== '-'){
+		sign = -1;
+		i =1;
+	}
 	for (int i = 2; i < strlen(num); i++){
 		if (num[i] >= '0' && num[i] <= '1'){
 			res = res*2 + (num[i]- '0');
 		}
 	}
-	return res;
+	return sign * res;
 }
 
 char *tbin(int num){
