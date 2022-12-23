@@ -22,7 +22,20 @@ int fhex(char *num) {
     	return sign*res;
 }
 
-
+int ishex(char *num){
+	int i = 2;
+	if (num[0] == '-'){
+		i++;
+	}
+	for (; i<strlen(num); i++){
+		if ((num[i] >= '0' && num[i] <= '9') || (num[i] >= 'a' && num[i] <= 'f') || (num[i] >= 'A' && num[i] <= 'F')){
+			continue;
+		} else{
+			return 1;
+		}
+	}
+	return 0;
+}
 char *thex(int num) {
 	char *res = (char *) malloc(sizeof(char));
 	while (num > 0) {

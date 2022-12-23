@@ -3,5 +3,5 @@
 
 int fhex(char* num);
 char *thex(int num);
-
+int ishex(char *num);
 #endif

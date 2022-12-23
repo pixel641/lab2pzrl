@@ -9,7 +9,7 @@ int main() {
 	getline(&input, &input_size, stdin);
 	int check = calc(input);
 	if (check == 1) {
-		printf("Системы счисления не совпадают");
+		printf("error");
 	}
 	free(input);
 	return 0;

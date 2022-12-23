@@ -3,5 +3,6 @@
 
 int fbin(char* num);
 char *tbin(int num);
+int isbin(char *num);
 
 #endif

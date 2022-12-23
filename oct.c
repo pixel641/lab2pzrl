@@ -20,6 +20,20 @@ char* toct(int num) {
    	return res_rev;
 }
 
+int isoct(char *num){
+	int i = 1;
+	if (num[0] == '-'){
+		i++;
+	}
+	for (; i<strlen(num); i++){
+		if (num[i]>= '0' && num[i] <= '7'){
+			continue;
+		} else {
+			return 1;
+		}
+	}
+	return 0;
+}
 int foct(char *num) {
    	int res = 0;
 	int sign =1;

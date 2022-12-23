@@ -46,7 +46,7 @@ void print(int n, int fl) {
             if (len) {
                 printf("0x%s (%d)\n", res, n);
             } else {
-                printf("0x0 0\n");
+                printf("0x0 (0)\n");
             }
             break;
         case 1:
@@ -55,7 +55,7 @@ void print(int n, int fl) {
             if (len) {
                 printf("0%s (%d)\n", res, n);
             } else {
-                printf("00 0\n");
+                printf("00 (0)\n");
             }
             break;
         case 2:
@@ -64,13 +64,26 @@ void print(int n, int fl) {
             if (len) {
                 printf("%s (%d)\n", res, n);
             } else {
-                printf("0 0\n");
+                printf("0 (0)\n");
             }
             break;
         default:
             return;
     }
     free(res);
+}
+
+int islegit(char *num, int fl){
+	switch (fl){
+		case 0:
+			return ishex(num);
+		case 1:
+			return isoct(num);
+		case 2:
+			return isbin(num);
+		default:
+			return -1;
+	}
 }
 
 int check_system(char *str) {
@@ -120,51 +133,60 @@ int for_one_number(char *str) {
 }
 
 int for_two_numbers(char *str) {
-    char num1[128];
-    char num2[128];
-    memset(num1, 0, sizeof(num1));
-    memset(num2, 0, sizeof(num2));
+    	char num1[128];
+    	char num2[128];
+    	memset(num1, 0, sizeof(num1));
+    	memset(num2, 0, sizeof(num2));
 
-    char op;
-    int fl = 0;
+    	char op;
+    	int fl = 0;
 
-    for (int i = 0; i < strlen(str); i++) {
-        if (isspace(str[i])) {
-            continue;
-        }
-        if ((str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/' || str[i] == '&' || str[i] == '|' ||
-             str[i] == '^') && fl == 1) {
-            op = str[i];
-            fl = 2;
-            continue;
-        }
-        if (fl == 0 || fl == 1) {
-            fl = 1;
-            num1[strlen(num1)] = str[i];
-        } else {
-            num2[strlen(num2)] = str[i];
-        }
-    }
+    	for (int i = 0; i < strlen(str); i++) {
+        	if (isspace(str[i])) {
+            		continue;
+        	}
+        	if ((str[i] == '+' || str[i] == '-' || str[i] == '*' || str[i] == '/' || str[i] == '&' || str[i] == '|' || str[i] == '^') && fl == 1) {
+            		op = str[i];
+            		fl = 2;
+            		continue;
+        	}
+        	if (fl == 0 || fl == 1) {
+            		fl = 1;
+            		num1[strlen(num1)] = str[i];
+        	} else {
+            		num2[strlen(num2)] = str[i];
+        	}
+    	}
+	
+    	int fl1 = check_system(num1);
+    	int fl2 = check_system(num2);
+    	if (fl1 != fl2 || fl == -1 || fl2 == -1) {
+        	return 1;
+    	}
+	if (islegit(num1, fl1) == 1 || islegit(num2, fl2) == 1){
+		printf("error");
+		return 0;
+	}
 
-    int fl1 = check_system(num1);
-    int fl2 = check_system(num2);
-    if (fl1 != fl2) {
-        return 1;
-    }
-
-    int a = convert(num1, fl1);
-    int b = convert(num2, fl2);
-
-    int result = operation(a, b, op);
-    print(result, fl1);
-
-    return 0;
+    	int a = convert(num1, fl1);
+    	int b = convert(num2, fl2);
+	if ((op == '&' || op=='|' || op == '^') && (num1<0 || num2<0)){
+		printf("error");
+		return 0;
+	}
+	if (op == '/' && num2 == 0) {
+		printf("error");
+		return 0;
+	}
+    	int result = operation(a, b, op);
+    	print(result, fl1);
+    	return 0;
 }
 
 int calc(char *str) {
-    if (str[0] == '~') {
-        return for_one_number(str);
-    } else {
-        return for_two_numbers(str);
-    }
+    	if (str[0] == '~') {
+        	return for_one_number(str);
+    	} else {
+        	return for_two_numbers(str);
+    	}
 }

@@ -11,7 +11,7 @@ int fbin(char *num){
 		i =1;
 	}
 	for (; i < strlen(num); i++){
-		if (num[i] >= '0' && num[i] <= '1'){
+		if (num[i] == '0' || num[i] == '1'){
 			res = res*2 + (num[i]- '0');
 		}
 	}
@@ -33,4 +33,18 @@ char *tbin(int num){
 	}
 	free(res);
 	return res_rev;
+}
+int isbin(char *num){
+	int i = 0;
+	if (num[0] == '-'){
+		i++;
+	}
+	for (; i<strlen(num); i++){
+		if (num[i] == '0' || num[i] == '1'){
+			continue;
+		} else {
+			return 1;
+		}
+	}
+	return 0;
 }
