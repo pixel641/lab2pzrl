@@ -82,22 +82,24 @@ int islegit(char *num, int fl){
 		case 2:
 			return isbin(num);
 		default:
-			return -1;
+			return 1;
 	}
 }
 
 int check_system(char *str) {
-    int i = 0;
-    if (str[0] == '-') {
-        i = 1;
-    }
-    if (str[i] == '0' && str[i + 1] == 'x') {
-        return 0;
-    } else if (str[i] == '0') {
-        return 1;
-    } else {
-        return 2;
-    }
+    	int i = 0;
+    	if (str[0] == '-') {
+        	i = 1;
+    	}
+    	if (str[i] == '0' && str[i + 1] == 'x') {
+        	return 0;
+    	} else if (str[i] == '0') {
+        	return 1;
+    	} else if (str[i] == '1'){
+        	return 2;
+    	} else {
+		reutrn -1;
+	}
 }
 
 int convert(char *str, int fl) {
