@@ -126,7 +126,7 @@ int for_one_number(char *str) {
         number[strlen(number)] = str[i];
     }
 
-    int flag = check_system(str);
+    int flag = check_system(number);
     int num = convert(number, flag);
 
     print(~num, flag);
@@ -172,11 +172,11 @@ int for_two_numbers(char *str) {
 
     	int a = convert(num1, fl1);
     	int b = convert(num2, fl2);
-	if ((op == '&' || op=='|' || op == '^') && (num1<0 || num2<0)){
+	if ((op == '&' || op=='|' || op == '^') && (a<0 || b<0)){
 		printf("error");
 		return 0;
 	}
-	if (op == '/' && num2 == 0) {
+	if (op == '/' && b == 0) {
 		printf("error");
 		return 0;
 	}
