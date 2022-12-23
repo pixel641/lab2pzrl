@@ -172,7 +172,7 @@ int for_two_numbers(char *str) {
 
     	int a = convert(num1, fl1);
     	int b = convert(num2, fl2);
-	if ((op == '&' || op=='|' || op == '^') && (a<0 || b<0)){
+	if ((op == '&' || op == '|' || op == '^') && (a<0 || b<0)){
 		printf("error");
 		return 0;
 	}

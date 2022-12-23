@@ -47,5 +47,5 @@ int foct(char *num) {
            	res = res * 8 + (num[i] - '0');
        		}
    	}
-   	return res;
+   	return sign * res;
 }
