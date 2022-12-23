@@ -98,7 +98,7 @@ int check_system(char *str) {
     	} else if (str[i] == '1'){
         	return 2;
     	} else {
-		reutrn -1;
+		return -1;
 	}
 }
 
